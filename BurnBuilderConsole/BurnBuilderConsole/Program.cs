@@ -7,6 +7,7 @@ using System.Text.Json;
 //using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
+using BurnBuilderConsole.Models;
 using MtgApiManager;
 using MtgApiManager.Lib.Core;
 using MtgApiManager.Lib.Model;
@@ -26,7 +27,7 @@ namespace BurnBuilderConsole
             Console.WriteLine("********* Getting The Game Sets!! **********");
             await ProcessSets();
             Console.WriteLine("********* Getting The Game Cards! **********");
-            //await ProcessApiSets();
+            await ProcessCards();
         }
 
         // Access Methods to get JSON data.
@@ -68,76 +69,46 @@ namespace BurnBuilderConsole
                 Console.WriteLine($"Set object from List: {set.Name}");
             }
 
-
-            //dynamic dObject = JObject.Parse(response.Content);
-            //var setsList = new List<CardSet>();
-            
-            //foreach (var property in dObject.setsList)
-            //{
-            //    var set = property.Value;
-
-            //    var SetModel = new CardSet
-            //    {
-            //        Code = set.code,
-            //        Name = set.name,
-            //        Type  = set.type,
-            //        Booster = set.booster,
-            //        ReleaseDate = set.releasedate,
-            //        Block = set.block,
-            //        OnlineOnly = set.onlineonly 
-            //    };
-
-            //    setsList.Add(SetModel);
-
-            //    Console.WriteLine($"Name : {SetModel.Name}");
-            //}
-            
-            //string stringResponse = response.Content.Normalize();
-
-            //Console.WriteLine(stringResponse);
-
-            //Set cardSets = JsonConvert.DeserializeObject<Set>(stringResponse,
-            //    new JsonSerializerSettings());
-
-            //Console.WriteLine(cardSets);
-        }
-
-        private static async Task ProcessApiSets()
-        {
-            var client = new RestClient("https://api.magicthegathering.io/v1");
-            client.UseSystemTextJson();
-            var request = new RestRequest("sets", DataFormat.Json);
-
-            IRestResponse response = client.Get<CardSet>(request);
-
-            Console.WriteLine("Response Data");
-            Console.WriteLine(response.Content);
+            Console.WriteLine($"Total sets : {count}");
         }
 
         private static async Task ProcessCards()
         {
-            //client.DefaultRequestHeaders.Accept.Clear();
-            //client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/api.magicthegathering.v3+json"));
-            //client.DefaultRequestHeaders.Add("User-Agent", "Burn Builder");
+            int count = 0;
+            List<Cards> listOfCards = new List<Cards>();
 
-            //var stringTask = client.GetStringAsync("https://api.magicthegathering.io/v1/cards");
+            // Set up RestClient and connect to the api over http.
+            var client = new RestClient("https://api.magicthegathering.io/v1");
+            client.UseSystemTextJson();
+            var request = new RestRequest("cards", DataFormat.Json);
 
-            ////CardService service = new CardService();
-            //Exceptional<List<Card>> result = service.All();
-            //if (result.IsSuccess)
-            //{
-            //    var value = result.Value;
-            //}
-            //else
-            //{
-            //    var exception = result.Exception;
-            //}
-            //Console.WriteLine(result.Value);
-            //Console.WriteLine(result.Exception);
+            IRestResponse response = client.Get<Cards>(request);
 
-            //var asyncResult = await stringTask;
+            // Break the JSON document into the root and its data elements. 
+            using (JsonDocument document = JsonDocument.Parse(response.Content))
+            {
+                JsonElement root = document.RootElement;
+                JsonElement cardsElement = root.GetProperty("cards");
 
-            //Console.WriteLine(asyncResult);
+                count = cardsElement.GetArrayLength();
+
+                foreach (JsonElement card in cardsElement.EnumerateArray())
+                {
+                    Console.WriteLine($"Card object in JSON form: {card}");
+
+                    Cards cards = JsonSerializer.Deserialize<Cards>(card.ToString());
+
+                    listOfCards.Add(cards);
+                }
+
+            }
+            // Display all the cards after they have been deserialized.
+            foreach (var card in listOfCards)
+            {
+                Console.WriteLine($"Set object from List: {card.Name}");
+            }
+
+            Console.WriteLine($"Total cards : {count}");
         }
     }
 }
