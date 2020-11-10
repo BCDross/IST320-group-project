@@ -65,7 +65,7 @@ namespace BurnBuilderConsole
 
             foreach (var set in listOfSets)
             {
-                Console.WriteLine($"Set object from List: {set}");
+                Console.WriteLine($"Set object from List: {set.Name}");
             }
 
 
