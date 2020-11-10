@@ -4,6 +4,7 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Runtime.CompilerServices;
 using System.Text.Json;
+//using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
 using MtgApiManager;
@@ -20,31 +21,89 @@ namespace BurnBuilderConsole
 {
     class Program
     {
-
-        // Create the HTTP Client to reach out and access the api.
-        //private static readonly HttpClient client = new HttpClient();
-
         static async Task Main(string[] args)
         {
-            
-
+            Console.WriteLine("********* Getting The Game Sets!! **********");
             await ProcessSets();
-            Console.WriteLine("******************************************");
-            Console.WriteLine("********* This is a new method! **********");
-            Console.WriteLine("******************************************");
-
+            Console.WriteLine("********* Getting The Game Cards! **********");
             //await ProcessApiSets();
-
         }
 
         // Access Methods to get JSON data.
         private static async Task ProcessSets()
         {
-            // HTTP Call headers
-            //client.DefaultRequestHeaders.Accept.Clear();
-            //client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/api.magicthegathering.v3+json"));
-            //client.DefaultRequestHeaders.Add("User-Agent", "Burn Builder");
+            int count = 0;
+            List<CardSet> listOfSets = new List<CardSet>();
 
+            // Set up RestClient and connect to the api over http.
+            var client = new RestClient("https://api.magicthegathering.io/v1");
+            client.UseSystemTextJson();
+            var request = new RestRequest("sets", DataFormat.Json);
+
+            IRestResponse response = client.Get<CardSet>(request);
+
+            //Console.WriteLine("Response Data");
+            //Console.WriteLine(response.Content);
+
+            using (JsonDocument document = JsonDocument.Parse(response.Content))
+            {
+                JsonElement root = document.RootElement;
+                JsonElement setsElement = root.GetProperty("sets");
+
+                count = setsElement.GetArrayLength();
+
+                foreach (JsonElement set in setsElement.EnumerateArray())
+                {
+                    Console.WriteLine($"Set object in JSON form: {set}");
+
+                    CardSet cardSet = JsonSerializer.Deserialize<CardSet>(set.ToString());
+
+                    listOfSets.Add(cardSet);
+                }
+
+            }
+
+            foreach (var set in listOfSets)
+            {
+                Console.WriteLine($"Set object from List: {set}");
+            }
+
+
+            //dynamic dObject = JObject.Parse(response.Content);
+            //var setsList = new List<CardSet>();
+            
+            //foreach (var property in dObject.setsList)
+            //{
+            //    var set = property.Value;
+
+            //    var SetModel = new CardSet
+            //    {
+            //        Code = set.code,
+            //        Name = set.name,
+            //        Type  = set.type,
+            //        Booster = set.booster,
+            //        ReleaseDate = set.releasedate,
+            //        Block = set.block,
+            //        OnlineOnly = set.onlineonly 
+            //    };
+
+            //    setsList.Add(SetModel);
+
+            //    Console.WriteLine($"Name : {SetModel.Name}");
+            //}
+            
+            //string stringResponse = response.Content.Normalize();
+
+            //Console.WriteLine(stringResponse);
+
+            //Set cardSets = JsonConvert.DeserializeObject<Set>(stringResponse,
+            //    new JsonSerializerSettings());
+
+            //Console.WriteLine(cardSets);
+        }
+
+        private static async Task ProcessApiSets()
+        {
             var client = new RestClient("https://api.magicthegathering.io/v1");
             client.UseSystemTextJson();
             var request = new RestRequest("sets", DataFormat.Json);
@@ -53,71 +112,6 @@ namespace BurnBuilderConsole
 
             Console.WriteLine("Response Data");
             Console.WriteLine(response.Content);
-
-            Set cardSets = JsonSerializer.Deserialize<Set>(response.Content, new JsonSerializerOptions {AllowTrailingCommas = true});
-
-            foreach (var cardSet in cardSets)
-            {
-                Console.WriteLine(cardSet.Name);
-            }
-
-            // This is the api uri to call and get data from API.
-            //var streamTask = client.GetStreamAsync("https://api.magicthegathering.io/v1/sets");
-            // Deserialize the data Stream from the API.
-            //var sets = await JsonSerializer.DeserializeAsync<Sets>(await streamTask);
-
-            //CardSets cardSets = JsonSerializer.Deserialize<Sets(response)
-
-            //// Set up the service call, and allow for error gathering.
-            //SetService service = new SetService();
-            //Exceptional<List<Set>> result = service.All();
-            //if (result.IsSuccess)
-            //{
-            //    var value = result.Value;
-            //}
-            //else
-            //{
-            //    var exception = result.Exception;
-            //}
-            //// If needed for exception.
-            //Console.WriteLine(result.Value);
-            //Console.WriteLine(result.Exception);
-
-            // save the call data to a variable when returned.
-            //foreach (var set in sets)
-            //{
-            //    Console.WriteLine(set.Name);
-            //}
-        }
-
-        private static async Task ProcessApiSets()
-        {
-            //client.DefaultRequestHeaders.Accept.Clear();
-            //client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-            //client.DefaultRequestHeaders.Add("User-Agent", "Burn Builder");
-
-            //var stringTask = client.GetStringAsync("https://api.magicthegathering.io/v1/sets");
-
-            //string setJson = stringTask.ToString();
-
-            
-
-            //CardService service = new CardService();
-            //Exceptional<List<Card>> result = service.All();
-            //if (result.IsSuccess)
-            //{
-            //    var value = result.Value;
-            //}
-            //else
-            //{
-            //    var exception = result.Exception;
-            //}
-            //Console.WriteLine(result.Value);
-            //Console.WriteLine(result.Exception);
-
-            //var asyncResult = await stringTask;
-
-            //Console.WriteLine(asyncResult);
         }
 
         private static async Task ProcessCards()
@@ -128,7 +122,7 @@ namespace BurnBuilderConsole
 
             //var stringTask = client.GetStringAsync("https://api.magicthegathering.io/v1/cards");
 
-            //CardService service = new CardService();
+            ////CardService service = new CardService();
             //Exceptional<List<Card>> result = service.All();
             //if (result.IsSuccess)
             //{

@@ -4,13 +4,14 @@ using System.Collections.Generic;
 using System.Text;
 using System.Text.Json.Serialization;
 using System.Transactions;
+using MtgApiManager.Lib.Dto;
 using MtgApiManager.Lib.Model;
 
 namespace BurnBuilderConsole
 {
-    public class Sets
+    public class CustomSets
     {
-        public Set SetData { get; set; }
+        public SetDto SetData { get; set; }
     }
     
     public class CardSet
@@ -34,7 +35,7 @@ namespace BurnBuilderConsole
         public string Block { get; set; }
 
         [JsonPropertyName("onlineOnly")]
-        public string OnlineOnly { get; set; }
+        public bool OnlineOnly { get; set; }
 
     }
 
