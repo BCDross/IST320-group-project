@@ -1,0 +1,31 @@
+﻿
+@{
+    ViewData["Title"] = "Admin";
+}
+
+<h1>Admin</h1>
+<form id="adminActions" asp-action="admin" method="post">
+    <label for="users">List of users: </label>
+    @*Just placeholder values for now until database is set up and I know how to call for list*@
+    <select name="users" id="users">
+        <option value="khang">Khang</option>
+        <option value="may">May</option>
+        <option value="khalid">Khalid</option>
+        <option value="devon">Devon</option>
+        <option value="darron">Darron</option>
+    </select>
+
+    <label><button type="rPassword">Reset Password</button></label>
+    <label style="color:red;">@ViewBag.resetPassword</label>
+
+    <label><button type="delete">Delete User</button></label>
+    <label style="color:red;">@ViewBag.deleted</label>
+</form>
+
+@*No links for homepage yet*@
+<nav>
+    <ul>
+        <li>Home</li>
+    </ul>
+</nav>
+    
