@@ -1,21 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Net.Http;
-using System.Net.Http.Headers;
-using System.Runtime.CompilerServices;
-using System.Text.Json;
-//using System.Text.Json;
-using System.Threading;
-using System.Threading.Tasks;
-using BurnBuilderConsole.Models;
-using MtgApiManager;
-using MtgApiManager.Lib.Core;
-using MtgApiManager.Lib.Model;
-using MtgApiManager.Lib.Service;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
+﻿using BurnBuilderConsole.Models;
 using RestSharp;
 using RestSharp.Serializers.SystemTextJson;
+using System;
+using System.Collections.Generic;
+using System.Text.Json;
+using System.Threading.Tasks;
 using JsonSerializer = System.Text.Json.JsonSerializer;
 
 namespace BurnBuilderConsole

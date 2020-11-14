@@ -1,10 +1,14 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
 
-namespace BurnBuilderConsole.Models
+namespace BurnBuilder.Models
 {
     public class CardSet
     {
+        [Key]
+        public int CardSetId { get; set; }
+
         [JsonPropertyName("code")]
         public string Code { get; set; }
         
@@ -14,9 +18,11 @@ namespace BurnBuilderConsole.Models
         [JsonPropertyName("type")]
         public string Type { get; set; }
 
+        [DataType(DataType.Text)]
         [JsonPropertyName("booster")]
-        public List<object> Booster { get; set; }
+        public string Booster { get; set; }
 
+        [DataType(DataType.Date)]
         [JsonPropertyName("releaseDate")]
         public string ReleaseDate { get; set; }
 
