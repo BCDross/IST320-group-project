@@ -14,12 +14,11 @@ namespace BurnBuilder.Models
         public string EmailAddress { get; set; }
         [DataType(DataType.Password)]
         public string Password { get; set; }
-        [StringLength(500)]
+        [StringLength(50)]
         public string FirstName { get; set; }
-        [StringLength(500)]
+        [StringLength(50)]
         public string LastName { get; set; }
         [DataType(DataType.DateTime)]
         public DateTime Created { get; set; }
-
     }
 }
