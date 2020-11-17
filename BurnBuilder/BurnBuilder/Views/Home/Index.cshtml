@@ -1,8 +1,26 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
-}
+﻿@{ ViewData["Title"] = "Home Page"; }
+@model BurnBuilder.Models.LoginCredentials
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+<h1>Index</h1>
+
+<form id="loginform" asp-action="LogIn" method="post">
+    <div class="inputwrap">
+        <label>Name: </label>
+        <input asp-for="UserName" class="roundcorners" required size="15" /><br />
+
+    </div>
+
+    <div class="inputwrap">
+        <label>Password: </label>
+        <input asp-for="Password" class="roundcorners" required size="15" />
+    </div>
+
+    <div class="inputwrap">
+        <label><button type="submit">Log In</button></label>
+        <label style="color:red;">@ViewBag.LoginMessage</label>
+    </div>
+</form>
+
+@*No actual link until I figure out the button situation plus someone sets up the create a deck page*@
+<h1>Create New Deck</h1>
+<label><button type="new">No Idea how to have just big plus symbol for button</button></label>
