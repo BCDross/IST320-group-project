@@ -1,31 +1,14 @@
-﻿
 @{
-    ViewData["Title"] = "Admin";
+    ViewData["Title"] = "Admin Page";
 }
 
-<h1>Admin</h1>
-<form id="adminActions" asp-action="admin" method="post">
-    <label for="users">List of users: </label>
-    @*Just placeholder values for now until database is set up and I know how to call for list*@
-    <select name="users" id="users">
-        <option value="khang">Khang</option>
-        <option value="may">May</option>
-        <option value="khalid">Khalid</option>
-        <option value="devon">Devon</option>
-        <option value="darron">Darron</option>
-    </select>
+  <label for="user-select">List of Users: </label>
+  <select name="userName" id="user-select">
+    <option value=""></option>
+    <option value=""></option>
+    <option value=""></option>
+  </select>
+  <br />
 
-    <label><button type="rPassword">Reset Password</button></label>
-    <label style="color:red;">@ViewBag.resetPassword</label>
-
-    <label><button type="delete">Delete User</button></label>
-    <label style="color:red;">@ViewBag.deleted</label>
-</form>
-
-@*No links for homepage yet*@
-<nav>
-    <ul>
-        <li>Home</li>
-    </ul>
-</nav>
-    
+  <input type="button" value="Delete User" id="buttonDelete" data-inline="true"   /> <br />
+  <input type="button" value="Reset Password" id="buttonResetPassword" data-inline="true"   /><br />
