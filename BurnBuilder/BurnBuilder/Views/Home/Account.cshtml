@@ -1,0 +1,29 @@
+﻿@{
+    ViewData["Title"] = "Account";
+}
+@model BurnBuilder.Models.UserInfo
+
+<h1>Account Details</h1>
+<nav>
+    <ul>
+        <li>Home</li>
+        <li>Browse Cards</li>
+        <li>View Deck</li>
+        <li>View Cards</li>
+    </ul>
+</nav>
+
+@*Wasn't too sure what this page was supposed to look like so I did my best guess*@
+
+<label>First Name: </label>
+<input asp-for="First" class="roundcorners" required size="15" />
+<br />
+
+<label>Last Name: </label>
+<input asp-for="Last" class="roundcorners" required size="15" />
+<br />
+
+<label><button type="account">Edit Account</button></label>
+<label><button type="delete">Delete Account</button></label>
+
+@*Download main branch and type in Update-Database into package manager*@

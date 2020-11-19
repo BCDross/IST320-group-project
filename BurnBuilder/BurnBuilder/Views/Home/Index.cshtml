@@ -1,8 +1,38 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
-}
+﻿@{ ViewData["Title"] = "Log In"; }
+@model BurnBuilder.Models.LoginCredentials
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+<h1>Index</h1>
+
+<form id="loginform" asp-action="HomePage" method="post">
+    <div class="inputwrap">
+        <label>Name: </label>
+        <input asp-for="UserName" class="roundcorners" required size="15" /><br />
+
+    </div>
+
+    <div class="inputwrap">
+        <label>Password: </label>
+        <input asp-for="Password" class="roundcorners" required size="15" type="password" id="myInput"/>
+        <br />
+        <input type="checkbox" id="passwordBox" />Show Password
+        <br />
+    </div>
+
+    <div class="inputwrap">
+        <label><button type="submit">Log In</button></label>
+        <label style="color:red;">@ViewBag.LoginMessage</label>
+    </div>
+</form>
+<script>
+        //this function is used to protect the password unless the box is checked to show password
+        const passBox = document.getElementById("passwordBox");
+        passBox.addEventListener("click", changePassword);
+        function changePassword() {
+            let x = document.getElementById("myInput");
+            if (x.type === "password") {
+                x.type = "text";
+            } else {
+                x.type = "password";
+            }
+        }
+</script>
