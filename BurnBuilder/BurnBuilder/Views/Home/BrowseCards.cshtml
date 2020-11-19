@@ -1,0 +1,33 @@
+﻿
+@{
+    ViewData["Title"] = "BrowseCards";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>BrowseCards</h1>
+
+@*Form for user to fill out to find a card they want to look at*@
+<form>
+    <label>Name: </label>
+    <select name="cardName" id="cardSelect">
+        <option value=""></option>
+        <option value=""></option>
+        <option value=""></option>
+    </select>
+    <<label>Colors: </label>
+    <select name="cardColor" id="cardSelect">
+        <option value=""></option>
+        <option value=""></option>
+        <option value=""></option>
+    </select>
+    <input type="button" value="search" id="searchButton" /><br />
+</form>
+
+@*The results will be displayed here*@
+<label>Results: </label>
+div class="card" style="width: 20rem;">
+<div class="card-body">
+    <h5 class="card-title">Deck title</h5>
+    <h6 class="card-subtitle mb-2 text-muted">Deck subtitle</h6>
+    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+</div>
