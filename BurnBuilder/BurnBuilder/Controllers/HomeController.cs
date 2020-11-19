@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -22,7 +22,29 @@ namespace BurnBuilder.Controllers
         {
             return View();
         }
+        public IActionResult HomePage()
+        {
+            return View();
+        }
 
+        public IActionResult Admin()
+        {
+            return View();
+        }
+
+        public IActionResult Account()
+        {
+            return View();
+        }
+
+        public IActionResult ViewCard()
+        {
+            return View();
+        }
+        public IActionResult ViewDeck()
+        {
+            return View();
+        }
         public IActionResult Privacy()
         {
             return View();
