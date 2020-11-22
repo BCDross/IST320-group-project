@@ -1,9 +1,9 @@
-﻿@{ ViewData["Title"] = "Home Page"; }
+﻿@{ ViewData["Title"] = "Log In"; }
 @model BurnBuilder.Models.LoginCredentials
 
 <h1>Index</h1>
 
-<form id="loginform" asp-action="LogIn" method="post">
+<form id="loginform" asp-action="HomePage" method="post">
     <div class="inputwrap">
         <label>Name: </label>
         <input asp-for="UserName" class="roundcorners" required size="15" /><br />
@@ -12,7 +12,10 @@
 
     <div class="inputwrap">
         <label>Password: </label>
-        <input asp-for="Password" class="roundcorners" required size="15" />
+        <input asp-for="Password" class="roundcorners" required size="15" type="password" id="myInput"/>
+        <br />
+        <input type="checkbox" id="passwordBox" />Show Password
+        <br />
     </div>
 
     <div class="inputwrap">
@@ -20,7 +23,16 @@
         <label style="color:red;">@ViewBag.LoginMessage</label>
     </div>
 </form>
-
-@*No actual link until I figure out the button situation plus someone sets up the create a deck page*@
-<h1>Create New Deck</h1>
-<label><button type="new">No Idea how to have just big plus symbol for button</button></label>
+<script>
+        //this function is used to protect the password unless the box is checked to show password
+        const passBox = document.getElementById("passwordBox");
+        passBox.addEventListener("click", changePassword);
+        function changePassword() {
+            let x = document.getElementById("myInput");
+            if (x.type === "password") {
+                x.type = "text";
+            } else {
+                x.type = "password";
+            }
+        }
+</script>
