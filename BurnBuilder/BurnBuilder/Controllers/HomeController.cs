@@ -50,15 +50,6 @@ namespace BurnBuilder.Controllers
             return View();
         }
         
-        public IActionResult ViewCard()
-        {
-            return View();
-        }
-        public IActionResult ViewDeck()
-        {
-            return View();
-        }
-
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
