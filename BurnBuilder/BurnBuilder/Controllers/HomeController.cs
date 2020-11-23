@@ -45,6 +45,14 @@ namespace BurnBuilder.Controllers
         {
             return View();
         }
+        public IActionResult BrowseCards()
+        {
+            return View();
+        }
+        public IActionResult BrowseDecks()
+        {
+            return View();
+        }
         public IActionResult Privacy()
         {
             return View();
