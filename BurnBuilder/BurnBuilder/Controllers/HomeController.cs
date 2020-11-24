@@ -35,7 +35,7 @@ namespace BurnBuilder.Controllers
             }
             else
             {
-                HttpContext.Session.SetString("uID", personModel.UserId.ToString());
+                HttpContext.Session.SetInt32("uID", personModel.UserId);
                 ViewBag.LoginMessage = "Login Successful";
             }
             return View("HomePage");

@@ -93,7 +93,6 @@ namespace BurnBuilder.DAL
             cmd.Parameters.AddWithValue("@Created", user.Created);
             cmd.Parameters.AddWithValue("@UserID", user.UserId);
 
-
             cmd.ExecuteNonQuery();
 
             conn.Close();
@@ -126,7 +125,7 @@ namespace BurnBuilder.DAL
             conn.Open();
 
             string query = "SELECT UserID, FirstName FROM User WHERE EmailAddress = @EmailAddress AND Password = @Password";
-            SqlCommand cmd = new SqlCommand();
+            SqlCommand cmd = new SqlCommand(query, conn);
             cmd.Parameters.AddWithValue("@EmailAddress", user.EmailAddress);
             cmd.Parameters.AddWithValue("@Password", user.Password);
 
