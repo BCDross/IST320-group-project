@@ -1,12 +1,12 @@
 ﻿@{ ViewData["Title"] = "Log In"; }
-@model BurnBuilder.Models.LoginCredentials
+@model BurnBuilder.Models.User
 
 <h1>Index</h1>
 
 <form id="loginform" asp-action="HomePage" method="post">
     <div class="inputwrap">
-        <label>Name: </label>
-        <input asp-for="UserName" class="roundcorners" required size="15" /><br />
+        <label>Email Address: </label>
+        <input asp-for="EmailAddress" class="roundcorners" required size="15" /><br />
 
     </div>
 

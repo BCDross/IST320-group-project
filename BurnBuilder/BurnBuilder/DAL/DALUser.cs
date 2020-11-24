@@ -19,7 +19,7 @@ namespace BurnBuilder.DAL
             this.configuration = config;
         }
 
-        internal string InsertUser(Models.User user)
+        internal int InsertUser(User user)
         {
             string connStr = configuration.GetConnectionString("DefaultConnection");
             SqlConnection conn = new SqlConnection(connStr);
@@ -36,13 +36,13 @@ namespace BurnBuilder.DAL
             SqlDataReader reader = cmd.ExecuteReader();
             reader.Read();
 
-            string UserID = reader[0].ToString();
+            int userID = Convert.ToInt32(reader[0].ToString());
 
             reader.Close();
 
             conn.Close();
             
-            return UserID;
+            return userID;
         }
 
         internal User GetUserById(int userId)
@@ -78,7 +78,7 @@ namespace BurnBuilder.DAL
             return u;
         }
 
-        internal User UpdateUser(Models.User user)
+        internal User UpdateUser(User user)
         {
             string connStr = configuration.GetConnectionString("DefaultConnection");
             SqlConnection conn = new SqlConnection(connStr);
