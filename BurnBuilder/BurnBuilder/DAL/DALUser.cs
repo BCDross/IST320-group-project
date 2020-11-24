@@ -124,19 +124,18 @@ namespace BurnBuilder.DAL
             SqlConnection conn = new SqlConnection(connStr);
             conn.Open();
 
-            string query = "SELECT UserID, FirstName FROM User WHERE EmailAddress = @EmailAddress AND Password = @Password";
+            string query = "SELECT UserID, FirstName FROM [User] WHERE EmailAddress = @EmailAddress AND Password = @Password";
             SqlCommand cmd = new SqlCommand(query, conn);
             cmd.Parameters.AddWithValue("@EmailAddress", user.EmailAddress);
             cmd.Parameters.AddWithValue("@Password", user.Password);
 
             SqlDataReader reader = cmd.ExecuteReader();
-            User u = null;
+            User u = new User();
 
             if (reader.Read())
             {
-                u = new User();
                 u.FirstName = reader["FirstName"].ToString();
-                u.UserId = Int32.Parse(reader["UserID"].ToString());
+                u.UserId = Convert.ToInt32(reader["UserID"]);
             }
             else
             {
