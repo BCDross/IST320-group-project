@@ -6,21 +6,39 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using BurnBuilder.Models;
+using BurnBuilder.DAL;
+using Microsoft.Extensions.Configuration;
+using Microsoft.AspNetCore.Http;
+using System.Data.SqlClient;
 
 namespace BurnBuilder.Controllers
 {
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly IConfiguration _configuration;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, IConfiguration config)
         {
+            _configuration = config;
             _logger = logger;
         }
 
-        public IActionResult Index()
+        public IActionResult Index(User User)
         {
-            return View();
+            DALUser dp = new DALUser(_configuration);
+            User personModel = dp.IsValidUser(User);
+
+            if (personModel == null)
+            {
+                ViewBag.LoginMessage = "Login Failed";
+            }
+            else
+            {
+                HttpContext.Session.SetString("uID", personModel.UserId.ToString());
+                ViewBag.LoginMessage = "Login Successful";
+            }
+            return View("HomePage");
         }
         public IActionResult HomePage()
         {

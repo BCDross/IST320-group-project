@@ -12,16 +12,16 @@ namespace BurnBuilder.DAL
 {
     public class DALUser
     {
-        private readonly IConfiguration configuration;
+        private IConfiguration _configuration { get; }
 
         public DALUser(IConfiguration config)
         {
-            this.configuration = config;
+            _configuration = config;
         }
 
         internal int InsertUser(User user)
         {
-            string connStr = configuration.GetConnectionString("DefaultConnection");
+            string connStr = _configuration.GetConnectionString("DefaultConnection");
             SqlConnection conn = new SqlConnection(connStr);
             conn.Open();
 
@@ -47,7 +47,7 @@ namespace BurnBuilder.DAL
 
         internal User GetUserById(int userId)
         {
-            string connStr = configuration.GetConnectionString("DefaultConnection");
+            string connStr = _configuration.GetConnectionString("DefaultConnection");
             SqlConnection conn = new SqlConnection(connStr);
             conn.Open();
 
@@ -80,7 +80,7 @@ namespace BurnBuilder.DAL
 
         internal User UpdateUser(User user)
         {
-            string connStr = configuration.GetConnectionString("DefaultConnection");
+            string connStr = _configuration.GetConnectionString("DefaultConnection");
             SqlConnection conn = new SqlConnection(connStr);
             conn.Open();
 
@@ -105,7 +105,7 @@ namespace BurnBuilder.DAL
 
         internal void DeleteUser(int userId)
         {
-            string connStr = configuration.GetConnectionString("DefaultConnection");
+            string connStr = _configuration.GetConnectionString("DefaultConnection");
             SqlConnection conn = new SqlConnection(connStr);
             conn.Open();
 
@@ -121,7 +121,7 @@ namespace BurnBuilder.DAL
         // May implement a loginCredentials Model for this as it is simple and more secure.
         internal User IsValidUser(User user)
         {
-            string connStr = configuration.GetConnectionString("DefaultConnection");
+            string connStr = _configuration.GetConnectionString("DefaultConnection");
             SqlConnection conn = new SqlConnection(connStr);
             conn.Open();
 
