@@ -42,34 +42,90 @@ namespace BurnBuilder.Controllers
         }
         public IActionResult HomePage()
         {
-            return View();
+            string struID = HttpContext.Session.GetString("uID");
+            if (struID == null)
+            {
+                return View("Index");
+            }
+            else
+            {
+                return View();
+            }
         }
 
         public IActionResult Admin()
         {
-            return View();
+            string struID = HttpContext.Session.GetString("uID");
+            if (struID == null)
+            {
+                return View("Index");
+            }
+            else
+            {
+                return View();
+            }
         }
 
         public IActionResult Account()
         {
-            return View();
+            string struID = HttpContext.Session.GetString("uID");
+            if (struID == null)
+            {
+                return View("Index");
+            }
+            else
+            {
+                return View();
+            }
         }
 
         public IActionResult ViewCard()
         {
-            return View();
+            string struID = HttpContext.Session.GetString("uID");
+            if (struID == null)
+            {
+                return View("Index");
+            }
+            else
+            {
+                return View();
+            }
         }
         public IActionResult ViewDeck()
         {
-            return View();
+            string struID = HttpContext.Session.GetString("uID");
+            if (struID == null)
+            {
+                return View("Index");
+            }
+            else
+            {
+                return View();
+            }
         }
         public IActionResult BrowseCards()
         {
-            return View();
+            string struID = HttpContext.Session.GetString("uID");
+            if (struID == null)
+            {
+                return View("Index");
+            }
+            else
+            {
+                return View();
+            }
         }
         public IActionResult BrowseDecks()
         {
-            return View();
+            string struID = HttpContext.Session.GetString("uID");
+            if (struID == null)
+            {
+                return View("Index");
+            }
+            else
+            {
+                return View();
+            }
         }
         public IActionResult Privacy()
         {
