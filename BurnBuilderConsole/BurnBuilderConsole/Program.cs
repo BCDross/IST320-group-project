@@ -1,22 +1,26 @@
 ﻿using BurnBuilderConsole.Models;
+using BurnBuilderConsole.DAL;
 using RestSharp;
 using RestSharp.Serializers.SystemTextJson;
 using System;
 using System.Collections.Generic;
 using System.Text.Json;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Configuration;
 using JsonSerializer = System.Text.Json.JsonSerializer;
 
 namespace BurnBuilderConsole
 {
     class Program
     {
+        private static IConfiguration _iConfiguration;
         static async Task Main(string[] args)
         {
+            Console.WriteLine("Getting the things... and putting them into the database.");
             Console.WriteLine("********* Getting The Game Sets!! **********");
             await ProcessSets();
-            Console.WriteLine("********* Getting The Game Cards! **********");
-            await ProcessCards();
+            //Console.WriteLine("********* Getting The Game Cards! **********");
+            //await ProcessCards();
         }
 
         // Access Methods to get JSON data.
@@ -59,19 +63,36 @@ namespace BurnBuilderConsole
             }
 
             Console.WriteLine($"Total sets : {count}");
+
+            //foreach (var set in listOfSets)
+            //{
+            //    DALCardSet  dCSet = new DALCardSet(_iConfiguration);
+            //    CardSet cSet = new CardSet();
+            //    cSet.Code = set.Code;
+            //    cSet.Name = set.Name;
+            //    cSet.Type = set.Type;
+            //    cSet.Booster = set.Booster;
+            //    cSet.ReleaseDate = set.ReleaseDate;
+            //    cSet.Block = set.Block;
+            //    cSet.OnlineOnly = set.OnlineOnly;
+
+            //    dCSet.InsertCardSet(cSet);
+
+            //    Console.WriteLine($"Set object from list saved: {cSet.Name}.");
+            //}
         }
 
         private static async Task ProcessCards()
         {
             int count = 0;
-            List<Cards> listOfCards = new List<Cards>();
+            List<Card> listOfCards = new List<Card>();
 
             // Set up RestClient and connect to the api over http.
             var client = new RestClient("https://api.magicthegathering.io/v1");
             client.UseSystemTextJson();
             var request = new RestRequest("cards", DataFormat.Json);
 
-            IRestResponse response = client.Get<Cards>(request);
+            IRestResponse response = client.Get<Card>(request);
 
             // Break the JSON document into the root and its data elements. 
             using (JsonDocument document = JsonDocument.Parse(response.Content))
@@ -85,7 +106,7 @@ namespace BurnBuilderConsole
                 {
                     Console.WriteLine($"Card object in JSON form: {card}");
 
-                    Cards cards = JsonSerializer.Deserialize<Cards>(card.ToString());
+                    Card cards = JsonSerializer.Deserialize<Card>(card.ToString());
 
                     listOfCards.Add(cards);
                 }

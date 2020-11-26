@@ -1,85 +1,67 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 using System.Text.Json.Serialization;
 
 namespace BurnBuilderConsole.Models
 {
     // Needs to be named Cards to differentiate between the MTG SDK and our internal structures.
-    class Cards
+    [Table("Card")]
+    public class Card
     {
+        [Key]
+        public int CardId { get; set; }
         [JsonPropertyName("name")]
         public string Name { get; set; }
-
         [JsonPropertyName("manaCost")]
         public string ManaCost { get; set; }
-        
+        [Column(TypeName = "decimal")]
         [JsonPropertyName("cmc")]
         public decimal Cmc { get; set; }
-        
         [JsonPropertyName("colors")]
-        public List<object> Colors { get; set; }
-        
+        public string Colors { get; set; }
         [JsonPropertyName("colorIdentity")]
-        public List<object> ColorIdentity { get; set; }
-        
+        public string ColorIdentity { get; set; }
         [JsonPropertyName("type")]
         public string Type { get; set; }
-        
         [JsonPropertyName("supertypes")]
-        public List<object> Supertypes { get; set; }
-        
+        public string Supertypes { get; set; }
         [JsonPropertyName("types")]
-        public List<object> Types { get; set; }
-        
+        public string Types { get; set; }
         [JsonPropertyName("subtypes")]
-        public List<object> Subtypes { get; set; }
-        
+        public string Subtypes { get; set; }
         [JsonPropertyName("rarity")]
         public string Rarity { get; set; }
-        
         [JsonPropertyName("set")]
         public string Set { get; set; }
-        
         [JsonPropertyName("setName")]
         public string SetName { get; set; }
-        
         [JsonPropertyName("text")]
         public string Text { get; set; }
-        
         [JsonPropertyName("artist")]
         public string Artist { get; set; }
-        
         [JsonPropertyName("number")]
         public string Number { get; set; }
-        
         [JsonPropertyName("layout")]
         public string Layout { get; set; }
-        
         [JsonPropertyName("multiverseid")]
         public int MultiverseID { get; set; }
-        
         [JsonPropertyName("imageUrl")]
         public string ImageUrl { get; set; }
-        
         [JsonPropertyName("rulings")]
-        public List<object> Rulings { get; set; }
-        
+        public string Rulings { get; set; }
         [JsonPropertyName("foreignNames")]
-        public List<object> ForeignNames { get; set; }
-        
+        public string ForeignNames { get; set; }
         [JsonPropertyName("printings")]
-        public List<object> Printings { get; set; }
-
+        public string Printings { get; set; }
         [JsonPropertyName("originalText")]
         public string OriginalText { get; set; }
-
         [JsonPropertyName("originalType")]
         public string OriginalType { get; set; }
-
         [JsonPropertyName("legalities")]
-        public List<object> Legalities { get; set; }
-
+        public string Legalities { get; set; }
         [JsonPropertyName("id")]
         public string Id { get; set; }
     }

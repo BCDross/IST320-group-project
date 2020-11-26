@@ -26,8 +26,12 @@ namespace BurnBuilder.Controllers
 
         public IActionResult Index(User User)
         {
+            return View("Index");
+        }
+        public IActionResult HomePage(User user)
+        {
             DALUser dp = new DALUser(_configuration);
-            User personModel = dp.IsValidUser(User);
+            User personModel = dp.IsValidUser(user);
 
             if (personModel == null)
             {
@@ -39,18 +43,6 @@ namespace BurnBuilder.Controllers
                 ViewBag.LoginMessage = "Login Successful";
             }
             return View("HomePage");
-        }
-        public IActionResult HomePage()
-        {
-            string struID = HttpContext.Session.GetString("uID");
-            if (struID == null)
-            {
-                return View("Index");
-            }
-            else
-            {
-                return View();
-            }
         }
 
         public IActionResult Admin()
