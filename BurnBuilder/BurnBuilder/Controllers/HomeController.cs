@@ -45,7 +45,7 @@ namespace BurnBuilder.Controllers
             return View("HomePage");
         }
 
-        public IActionResult Admin()
+        /*public IActionResult Admin()
         {
             string struID = HttpContext.Session.GetString("uID");
             if (struID == null)
@@ -56,7 +56,7 @@ namespace BurnBuilder.Controllers
             {
                 return View();
             }
-        }
+        }*/
 
         public IActionResult Account()
         {
@@ -119,10 +119,10 @@ namespace BurnBuilder.Controllers
                 return View();
             }
         }
-        public IActionResult Privacy()
+        /*public IActionResult Privacy()
         {
             return View();
-        }
+        }*/
         
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
