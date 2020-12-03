@@ -68,14 +68,12 @@ namespace BurnBuilder.Controllers
             {
                 return View("HomePage");
             }
-            return View(personModel);
         }
 
-<<<<<<< Updated upstream
+
         /*public IActionResult Admin()
-=======
         public IActionResult Admin(User user)
->>>>>>> Stashed changes
+
         {
             string struID = HttpContext.Session.GetString("uID");
             if (struID == null)
