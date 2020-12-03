@@ -45,7 +45,11 @@ namespace BurnBuilder.Controllers
             return View("HomePage");
         }
 
+<<<<<<< Updated upstream
         /*public IActionResult Admin()
+=======
+        public IActionResult Admin(User user)
+>>>>>>> Stashed changes
         {
             string struID = HttpContext.Session.GetString("uID");
             if (struID == null)
@@ -54,11 +58,12 @@ namespace BurnBuilder.Controllers
             }
             else
             {
+
                 return View();
             }
         }*/
 
-        public IActionResult Account()
+        public IActionResult Account(User user)
         {
             string struID = HttpContext.Session.GetString("uID");
             if (struID == null)
@@ -67,11 +72,11 @@ namespace BurnBuilder.Controllers
             }
             else
             {
-                return View();
+                return View("Account");
             }
         }
 
-        public IActionResult ViewCard()
+        public IActionResult ViewCard(Card card)
         {
             string struID = HttpContext.Session.GetString("uID");
             if (struID == null)
@@ -80,10 +85,14 @@ namespace BurnBuilder.Controllers
             }
             else
             {
-                return View();
+                DALCard uCard = new DALCard(_configuration);
+                int cID = Convert.ToInt32(uCard.GetCardById(card.CardId));
+                card.CardId = cID;
+
+                return View(card);
             }
         }
-        public IActionResult ViewDeck()
+        public IActionResult ViewDeck(Deck deck)
         {
             string struID = HttpContext.Session.GetString("uID");
             if (struID == null)
@@ -92,10 +101,14 @@ namespace BurnBuilder.Controllers
             }
             else
             {
-                return View();
+                DALDeck uDeck = new DALDeck(_configuration);
+                int dID = Convert.ToInt32(uDeck.GetDeckByID(deck.DeckId));
+                deck.DeckId = dID;
+
+                return View(deck);
             }
         }
-        public IActionResult BrowseCards()
+        public IActionResult BrowseCards(Card card)
         {
             string struID = HttpContext.Session.GetString("uID");
             if (struID == null)
@@ -104,10 +117,14 @@ namespace BurnBuilder.Controllers
             }
             else
             {
-                return View();
+                DALCardSet uCardset = new DALCardSet(_configuration);
+                int csID = Convert.ToInt32(uCardset.GetCardSetById(card.CardId));
+                card.CardId = csID;
+
+                return View(card);
             }
         }
-        public IActionResult BrowseDecks()
+        public IActionResult BrowseDecks(Deck deck)
         {
             string struID = HttpContext.Session.GetString("uID");
             if (struID == null)
@@ -116,7 +133,11 @@ namespace BurnBuilder.Controllers
             }
             else
             {
-                return View();
+                DALDeck uDeck = new DALDeck(_configuration);
+                int dID = Convert.ToInt32(uDeck.GetDeckByID(deck.DeckId));
+                deck.DeckId = dID;
+
+                return View(deck);
             }
         }
         /*public IActionResult Privacy()
