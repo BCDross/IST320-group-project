@@ -28,7 +28,18 @@ namespace BurnBuilder.Controllers
         {
             return View();
         }
-        public IActionResult HomePage(User user)
+        
+        public IActionResult Register(User User)
+        {
+            DALUser dALPerson = new DALUser(_configuration);
+            int UserID = dALPerson.InsertUser(User);
+
+            User.UserId = UserID;
+
+            return View(User);
+        }
+        
+        public IActionResult checkValidUser(User user)
         {
             DALUser dp = new DALUser(_configuration);
             User personModel = dp.IsValidUser(user);
@@ -36,12 +47,26 @@ namespace BurnBuilder.Controllers
             if (personModel == null)
             {
                 ViewBag.LoginMessage = "Login Failed";
+            }
+            else
+            {
+                HttpContext.Session.SetString("uID", Convert.ToString(user.UserId));
+                ViewBag.LoginMessage = "Login Successful";
+            }
+            return View("HomePage");
+
+        }
+        
+        public IActionResult HomePage()
+        {
+            string struID = HttpContext.Session.GetString("uID");
+            if (struID == null)
+            {
                 return View("Index");
             }
             else
             {
-                HttpContext.Session.SetInt32("uID", personModel.UserId);
-                ViewBag.LoginMessage = "Login Successful";
+                return View("HomePage");
             }
             return View(personModel);
         }
