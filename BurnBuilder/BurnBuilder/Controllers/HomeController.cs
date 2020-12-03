@@ -24,9 +24,9 @@ namespace BurnBuilder.Controllers
             _logger = logger;
         }
 
-        public IActionResult Index(User User)
+        public IActionResult Index()
         {
-            return View("Index");
+            return View();
         }
         public IActionResult HomePage(User user)
         {
@@ -36,13 +36,14 @@ namespace BurnBuilder.Controllers
             if (personModel == null)
             {
                 ViewBag.LoginMessage = "Login Failed";
+                return View("Index");
             }
             else
             {
                 HttpContext.Session.SetInt32("uID", personModel.UserId);
                 ViewBag.LoginMessage = "Login Successful";
             }
-            return View("HomePage");
+            return View(personModel);
         }
 
         public IActionResult Admin()

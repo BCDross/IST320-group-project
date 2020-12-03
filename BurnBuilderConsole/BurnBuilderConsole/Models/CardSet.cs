@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using System.Text.Json;
 using System.Text.Json.Serialization;
 
 namespace BurnBuilderConsole.Models
@@ -15,9 +17,8 @@ namespace BurnBuilderConsole.Models
         public string Name { get; set; }
         [JsonPropertyName("type")]
         public string Type { get; set; }
-        [DataType(DataType.Text)]
         [JsonPropertyName("booster")]
-        public string Booster { get; set; }
+        public object Booster { get; set; }
         [DataType(DataType.Date)]
         [JsonPropertyName("releaseDate")]
         public DateTime ReleaseDate { get; set; }

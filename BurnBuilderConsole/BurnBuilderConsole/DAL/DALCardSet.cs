@@ -62,7 +62,7 @@ namespace BurnBuilderConsole.DAL
             string code = reader["Code"].ToString();
             string name = reader["Name"].ToString();
             string type = reader["Type"].ToString();
-            string booster = reader["Booster"].ToString();
+            object booster =  reader["Booster"];
             DateTime releaseDate = Convert.ToDateTime(reader["ReleaseDate"].ToString());
             string block = reader["Block"].ToString();
             bool onlineOnly = Convert.ToBoolean(reader["OnlineOnly"].ToString());

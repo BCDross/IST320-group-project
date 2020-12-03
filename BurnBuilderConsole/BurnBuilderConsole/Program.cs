@@ -4,6 +4,7 @@ using RestSharp;
 using RestSharp.Serializers.SystemTextJson;
 using System;
 using System.Collections.Generic;
+using System.Text.Encodings.Web;
 using System.Text.Json;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Configuration;
@@ -50,7 +51,7 @@ namespace BurnBuilderConsole
                 {
                     Console.WriteLine($"Set object in JSON form: {set}");
 
-                    CardSet cardSet = JsonSerializer.Deserialize<CardSet>(set.ToString());
+                    CardSet cardSet = JsonSerializer.Deserialize<CardSet>(Convert.ToString(set));
 
                     listOfSets.Add(cardSet);
                 }
