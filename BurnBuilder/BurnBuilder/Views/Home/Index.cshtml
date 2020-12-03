@@ -3,7 +3,7 @@
 
 <h1>Index</h1>
 
-<form id="loginform" asp-action="Index" method="post">
+<form id="loginform" asp-action="checkValidUser" method="post">
     <div class="inputwrap">
         <label>Email Address: </label>
         <input asp-for="EmailAddress" class="roundcorners" required size="15" /><br />
@@ -12,7 +12,7 @@
 
     <div class="inputwrap">
         <label>Password: </label>
-        <input asp-for="Password" class="roundcorners" required size="15" type="password" id="myInput"/>
+        <input asp-for="Password" class="roundcorners" required size="15" type="password" id="myInput" />
         <br />
         <input type="checkbox" id="passwordBox" />Show Password
         <br />
@@ -22,6 +22,24 @@
         <label><button type="submit">Log In</button></label>
         <label style="color:red;">@ViewBag.LoginMessage</label>
     </div>
+</form>
+<br />
+<br />
+<p>To register, Please add the info below:</p>
+<form asp-action="Register" method="post">
+    <label>First Name</label> <input asp-for="FirstName" />
+    <br />
+    <label>Last Name</label> <input asp-for="LastName" />
+    <br />
+    <label>Email</label> <input asp-for="EmailAddress" />
+    <br />
+    <label>Current time</label> <input asp-for="Created" /><p>example: 2020-11-25 12:00:00.0000000</p>
+    <br />
+    <label>Password</label> <input asp-for="Password" type="password" id="myInput" />
+    <br />
+    <input type="checkbox" id="passwordBox" />Show Password
+    <br />
+    <button type="submit">Submit</button>
 </form>
 <script>
         //this function is used to protect the password unless the box is checked to show password
