@@ -7,18 +7,23 @@
 <h1>Account Details</h1>
 
 Wasn't too sure what this page was supposed to look like so I did my best guess
-<label>Username: </label>
-<input asp-for="UserId" class="roundcorners" required size="15" />
-<br />
+<form asp-action="Account">
+    <label>Username: </label>
+    <input asp-for="UserId" class="roundcorners" required size="15" />
+    <br />
 
-<label>First Name: </label>
-<input asp-for="FirstName" class="roundcorners" required size="15" value="" />
-<br />
+    <label>First Name: </label>
+    <input asp-for="FirstName" class="roundcorners" required size="15" value="" />
+    <br />
 
-<label>Last Name: </label>
-<input asp-for="LastName" class="roundcorners" required size="15" value="" />
-<br />
+    <label>Last Name: </label>
+    <input asp-for="LastName" class="roundcorners" required size="15" value="" />
+    <br />
 
-<label><button type="account">Edit Account</button></label>
-<label><button type="delete">Delete Account</button></label>
+    <label><button type="decks">View Decks Created</button></label>
+    <label><button type="account">Edit Account</button></label>
+    <label><button type="delete">Delete Account</button></label>
+
+</form>
+
 
