@@ -24,7 +24,7 @@ namespace BurnBuilderConsole.DAL
             conn.Open();
 
             string query = "INSERT INTO [dbo].[CardSet]([Code],[Name],[Type],[Booster],[ReleaseDate],[Block],[OnlineOnly])" + " VALUES (@Code,@Name,@Type,@Booster,@ReleaseDate,@Block,@OnlineOnly) select SCOPE_IDENTITY() as id";
-            SqlCommand cmd = new SqlCommand();
+            SqlCommand cmd = new SqlCommand(query, conn);
             cmd.Parameters.AddWithValue("@Code", cardSet.Code);
             cmd.Parameters.AddWithValue("@Name", cardSet.Name);
             cmd.Parameters.AddWithValue("@Type", cardSet.Type);
@@ -62,7 +62,6 @@ namespace BurnBuilderConsole.DAL
             string code = reader["Code"].ToString();
             string name = reader["Name"].ToString();
             string type = reader["Type"].ToString();
-            object booster =  reader["Booster"];
             DateTime releaseDate = Convert.ToDateTime(reader["ReleaseDate"].ToString());
             string block = reader["Block"].ToString();
             bool onlineOnly = Convert.ToBoolean(reader["OnlineOnly"].ToString());
@@ -75,7 +74,7 @@ namespace BurnBuilderConsole.DAL
             cSet.Code = code;
             cSet.Name = name;
             cSet.Type = type;
-            cSet.Booster = booster;
+            cSet.Booster = null;
             cSet.ReleaseDate = releaseDate;
             cSet.Block = block;
             cSet.OnlineOnly = onlineOnly;

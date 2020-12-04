@@ -24,7 +24,7 @@ namespace BurnBuilderConsole.DAL
             conn.Open();
 
             string query =
-                "INSERT INTO [dbo].[Card]([Name],[ManaCost],[Cmc],[Colors],[ColorIdentity],[Type],[Supertypes],[Types],[Subtypes],[Rarity],[Set],[SetName],[Text],[Artist],[Number],[Layout],[MultiverseID],[ImageUrl],[Rulings],[ForeignNames],[Printings],[OriginalText],[Legalities],[Id])" +
+                "INSERT INTO [dbo].[Card]([Name],[ManaCost],[Cmc],[Colors],[ColorIdentity],[Type],[Supertypes],[Types],[Subtypes],[Rarity],[Set],[SetName],[Text],[Artist],[Number],[Layout],[MultiverseID],[ImageUrl],[Rulings],[ForeignNames],[Printings],[OriginalText],[OriginalType],[Legalities],[Id])" +
                 " VALUES(@Name,@ManaCost,@Cmc,@Colors,@ColorIdentity,@Type,@Supertypes,@Types,@Subtypes,@Rarity,@Set,@SetName,@Text,@Artist,@Number,@Layout,@MultiverseID,@ImageUrl,@Rulings,@ForeignNames,@Printings,@OriginalText,@OriginalType,@Legalities,@Id) select SCOPE_IDENTITY() as id";
             SqlCommand cmd = new SqlCommand(query, conn);
             cmd.Parameters.AddWithValue("@Name", card.Name);
@@ -103,7 +103,7 @@ namespace BurnBuilderConsole.DAL
             string originalText = reader["OriginalText"].ToString();
             string originalType = reader["OriginalType"].ToString();
             string legalities = reader["Legalities"].ToString();
-            string id = reader["ID"].ToString();
+            string id = reader["Id"].ToString();
 
             reader.Close();
 
@@ -148,6 +148,8 @@ namespace BurnBuilderConsole.DAL
             string query =
                 "UPDATE [dbo].[Card] SET [Name] = @Name, [ManaCost] = @ManaCost, [CmC] = @Cmc, [Colors] = @Colors, [ColorIdentity] = @ColorIdentity, [Type] = @Type, [Supertypes] = @Supertypes, [Types] = @Types, [Subtypes] = @Subtypes, [Rarity] = @Rarity, [Set] = @Set, [SetName] = @SetName, [Text] = @Text, [Artist] = @Artist, [Number] = @Number, [Layout] = @Layout, [MultiverseID] = @MultiverseID, [ImageUrl] = @ImageUrl, [Rulings] = @Rulings, [ForeignNames] = @ForeignNames, [Printings] = @Printings, [OriginalText] = @OriginalText, [OriginalType] = @OriginalType, [Legalities] = @Legalities, [ID] = @Id WHERE [CardID] = @CardID";
             SqlCommand cmd = new SqlCommand(query, conn);
+
+            cmd.Parameters.AddWithValue("@CardID", card.CardId);
             cmd.Parameters.AddWithValue("@Name", card.Name);
             cmd.Parameters.AddWithValue("@ManaCost", card.ManaCost);
             cmd.Parameters.AddWithValue("@Cmc", card.Cmc);

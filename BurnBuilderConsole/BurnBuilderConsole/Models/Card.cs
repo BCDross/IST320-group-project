@@ -20,17 +20,17 @@ namespace BurnBuilderConsole.Models
         [Column(TypeName = "decimal")]
         [JsonPropertyName("cmc")]
         public decimal Cmc { get; set; }
-        [JsonPropertyName("colors")]
+        [JsonIgnore]
         public string Colors { get; set; }
-        [JsonPropertyName("colorIdentity")]
+        [JsonIgnore]
         public string ColorIdentity { get; set; }
         [JsonPropertyName("type")]
         public string Type { get; set; }
-        [JsonPropertyName("supertypes")]
+        [JsonIgnore]
         public string Supertypes { get; set; }
-        [JsonPropertyName("types")]
+        [JsonIgnore]
         public string Types { get; set; }
-        [JsonPropertyName("subtypes")]
+        [JsonIgnore]
         public string Subtypes { get; set; }
         [JsonPropertyName("rarity")]
         public string Rarity { get; set; }
@@ -50,17 +50,17 @@ namespace BurnBuilderConsole.Models
         public int MultiverseID { get; set; }
         [JsonPropertyName("imageUrl")]
         public string ImageUrl { get; set; }
-        [JsonPropertyName("rulings")]
+        [JsonIgnore]
         public string Rulings { get; set; }
-        [JsonPropertyName("foreignNames")]
+        [JsonIgnore]
         public string ForeignNames { get; set; }
-        [JsonPropertyName("printings")]
+        [JsonIgnore]
         public string Printings { get; set; }
         [JsonPropertyName("originalText")]
         public string OriginalText { get; set; }
         [JsonPropertyName("originalType")]
         public string OriginalType { get; set; }
-        [JsonPropertyName("legalities")]
+        [JsonIgnore]
         public string Legalities { get; set; }
         [JsonPropertyName("id")]
         public string Id { get; set; }

@@ -17,7 +17,7 @@ namespace BurnBuilderConsole.Models
         public string Name { get; set; }
         [JsonPropertyName("type")]
         public string Type { get; set; }
-        [JsonPropertyName("booster")]
+        [JsonIgnore]
         public object Booster { get; set; }
         [DataType(DataType.Date)]
         [JsonPropertyName("releaseDate")]
