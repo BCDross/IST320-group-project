@@ -3,11 +3,14 @@
     ViewData["Title"] = "ViewCard";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-@model DeckCard
+
+@model BurnBuilder.Models.Card
 <h1>ViewCard</h1>
 <br />
 
-<form>
+<form asp-action="ViewCard" method="post">
+    <label>Name of Card: </label>
+    <input asp-for="Name" class="roundcorners" required size="15" /><br />
     <div class="card" style="width: 20rem;">
         <div class="card-body">
             <h5 class="card-title">Deck title</h5>

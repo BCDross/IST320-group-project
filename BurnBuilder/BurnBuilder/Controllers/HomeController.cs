@@ -11,6 +11,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.AspNetCore.Http;
 using System.Data.SqlClient;
 
+
 namespace BurnBuilder.Controllers
 {
     public class HomeController : Controller
@@ -28,7 +29,7 @@ namespace BurnBuilder.Controllers
         {
             return View();
         }
-        
+
         public IActionResult Register(User User)
         {
             DALUser dALPerson = new DALUser(_configuration);
@@ -100,6 +101,8 @@ namespace BurnBuilder.Controllers
             }
         }
 
+        
+
         public IActionResult ViewCard(Card card)
         {
             string struID = HttpContext.Session.GetString("uID");
@@ -109,11 +112,7 @@ namespace BurnBuilder.Controllers
             }
             else
             {
-                DALCard uCard = new DALCard(_configuration);
-                int cID = Convert.ToInt32(uCard.GetCardById(card.CardId));
-                card.CardId = cID;
-
-                return View(card);
+                return View();
             }
         }
         public IActionResult ViewDeck(Deck deck)
