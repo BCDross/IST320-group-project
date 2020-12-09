@@ -65,7 +65,57 @@ namespace BurnBuilder.DAL
             return cardId;
         }
 
-        internal Card GetCardById(int cardId)
+        internal LinkedList<Card> GetAllCards()
+        {
+            string connStr = configuration.GetConnectionString("DefaultConnection");
+            SqlConnection conn = new SqlConnection(connStr);
+            conn.Open();
+
+            string query =
+                "SELECT [Name],[ManaCost],[Cmc],[Colors],[ColorIdentity],[Type],[Supertypes],[Types],[Subtypes],[Rarity],[Set],[SetName],[Text],[Artist],[Number],[Layout],[MultiverseID],[ImageUrl],[Rulings],[ForeignNames],[Printings],[OriginalText],[Legalities],[Id] FROM [dbo].[Card]";
+            SqlCommand cmd = new SqlCommand(query, conn);
+
+            SqlDataReader reader = cmd.ExecuteReader();
+            
+            LinkedList<Card> allCards = new LinkedList<Card>();
+
+            while (reader.Read())
+            {
+                Card card = new Card();
+                card.CardId = Convert.ToInt32(reader["CardID"]);
+                card.Name = reader["Name"].ToString();
+                card.ManaCost = reader["ManaCost"].ToString();
+                card.Cmc = Convert.ToDecimal(reader["Cmc"].ToString());
+                card.Colors = reader["Colors"].ToString();
+                card.ColorIdentity = reader["ColorIdentity"].ToString();
+                card.Type = reader["Type"].ToString();
+                card.Supertypes = reader["Supertypes"].ToString();
+                card.Types = reader["Types"].ToString();
+                card.Subtypes = reader["Subtypes"].ToString();
+                card.Rarity = reader["Rarity"].ToString();
+                card.Set = reader["Set"].ToString();
+                card.SetName = reader["SetName"].ToString();
+                card.Text = reader["Text"].ToString();
+                card.Artist = reader["Artist"].ToString();
+                card.Number = reader["Number"].ToString();
+                card.Layout = reader["Layout"].ToString();
+                card.MultiverseID = Convert.ToInt32(reader["MultiverseID"]);
+                card.ImageUrl = reader["ImageUrl"].ToString();
+                card.Rulings = reader["Rulings"].ToString();
+                card.ForeignNames = reader["ForeignNames"].ToString();
+                card.Printings = reader["Printings"].ToString();
+                card.OriginalText = reader["OriginalText"].ToString();
+                card.OriginalType = reader["OriginalType"].ToString();
+                card.Legalities = reader["Legalities"].ToString();
+                card.Id = reader["ID"].ToString();
+            }
+            
+            conn.Close();
+
+            return allCards;
+        }
+
+            internal Card GetCardById(int cardId)
         {
             string connStr = configuration.GetConnectionString("DefaultConnection");
             SqlConnection conn = new SqlConnection(connStr);
