@@ -5,7 +5,10 @@ using System.Linq;
 using System.Threading.Tasks;
 
 namespace BurnBuilder.Models
-{
+{   
+    /// <summary>
+    /// These are all the fields in DeckCard Table in the database. 
+    /// </summary>
     public class DeckCard
     {
         [Key]
