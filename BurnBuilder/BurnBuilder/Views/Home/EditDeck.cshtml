@@ -3,22 +3,30 @@
     ViewData["Title"] = "EditDeck";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
+@model LinkedList<BurnBuilder.Models.Deck>
 <h1>EditDeck</h1>
 <br />
 
-@*Might need some help later on with figuring out how to find out deck size*@
-<p>Deck size: </p>
+@foreach(Deck deck in Model)
+{
+    <p>Click to Reveal Deck Details to Change</p>
+    <form asp-action="EditDeck" method="post">
+        <label>Name: </label>
+        <input class="roundcorners" required size="15" onclick="value = '@deck.DeckName'" />
+        <br />
 
-@*Also might need help later on figuring out what to do for *@
-<p>Cards: </p>
-<div class="card" style="width: 20rem;">
-    <div class="card-body">
-        <h5 class="card-title">Deck title</h5>
-        <h6 class="card-subtitle mb-2 text-muted">Deck subtitle</h6>
-        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-    </div>
-</div>
+        <label>Description: </label>
+        <input class="roundcorners" required size="15" onclick="value='@deck.Description'"/>
+        <br />
 
-@*And I'll need someone to show me how to pull down the deck despription the user will propably put in here*@
-<p>Deck Description: </p>
+        <label>Deck Color: </label>
+        <input class="roundcorners" required size="15" onclick="value='@deck.DeckColor'"/>
+        <br />
+
+        <a href="">Click to Change Cards in Deck</a>
+        <a href="">Click to Save Changes</a>
+    </form>
+}
+
+
+

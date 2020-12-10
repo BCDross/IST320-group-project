@@ -6,8 +6,8 @@
 
 <h1>Account Details</h1>
 
-Wasn't too sure what this page was supposed to look like so I did my best guess
-<form asp-action="Account">
+@*Wasn't too sure what this page was supposed to look like so I did my best guess*@
+<form asp-action="UpdateAccount">
     <label>Email Address: </label>
     <input asp-for="EmailAddress" class="roundcorners" required size="15" />
     <br />
@@ -19,11 +19,13 @@ Wasn't too sure what this page was supposed to look like so I did my best guess
     <label>Last Name: </label>
     <input asp-for="LastName" class="roundcorners" required size="15" />
     <br />
+    <label>Password</label> <input asp-for="Password" type="password" id="myInput" /><br />
 
-    <label><button type="decks">View Decks Created</button></label>
-    <label><button type="account">Edit Account</button></label>
+    <label>Current time</label> <input asp-for="Created" /><br />
+
+    <label><button type="submit">Save Changes to Account</button></label>
     <label><button type="delete">Delete Account</button></label>
 
 </form>
 
-
+<a href="@Url.Action("EditDeck", "Home")">Edit Deck</a>
