@@ -131,10 +131,11 @@ namespace BurnBuilder.Controllers
                 }
                 else
                 {
-                    DALDeck uDeck = new DALDeck(_configuration);
-                    uDeck.GetDeckByID(deck.DeckId);
+                    DALDeck dalDeck = new DALDeck(_configuration);
+                    LinkedList<Deck> deckList = new LinkedList<Deck>();
+                    deckList = dalDeck.GetAllDecks();
                     
-                    return View(uDeck);
+                    return View(deckList);
                 }
             }
         }
