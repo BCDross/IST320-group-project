@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace BurnBuilder.Models
 {
+    /// <summary>
+    /// These are all the fields in User Table in the database. 
+    /// </summary>
     public class User
     {
         [Key]
