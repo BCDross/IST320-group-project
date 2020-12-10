@@ -216,10 +216,12 @@ namespace BurnBuilder.Controllers
             else
             {
                 DALCard dalCard = new DALCard(_configuration);
-                LinkedList<Card> cardList = new LinkedList<Card>();
-                cardList = dalCard.GetAllCards();
+                DALDeck dalDeck = new DALDeck(_configuration);
+                //DALDeckCard dalDeckCard = new DALDeckCard(_configuration);
 
-                return View(cardList);
+                var tupleModel = new Tuple<LinkedList<Card>, LinkedList<Deck>>(dalCard.GetAllCards(), dalDeck.GetAllDecksByUserID(Convert.ToInt32(HttpContext.Session.GetString("uID")))); 
+
+                return View(tupleModel);
             }
         }
         

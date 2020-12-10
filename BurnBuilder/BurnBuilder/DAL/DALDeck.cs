@@ -79,6 +79,37 @@ namespace BurnBuilder.DAL
             return deckList;
         }
 
+        internal LinkedList<Deck> GetAllDecksByUserID(int userID)
+        {
+            string connStr = configuration.GetConnectionString("DefaultConnection");
+            SqlConnection conn = new SqlConnection(connStr);
+            conn.Open();
+
+            string query = "SELECT [DeckID],[CreatorUserID],[DeckName],[Created],[Description],[DeckColor] FROM [dbo].[Deck] WHERE @CreatorUserID = CreatorUserID;";
+            SqlCommand cmd = new SqlCommand(query, conn);
+            cmd.Parameters.AddWithValue("@CreatorUserID", userID);
+
+            SqlDataReader reader = cmd.ExecuteReader();
+
+            LinkedList<Deck> deckList = new LinkedList<Deck>();
+            while (reader.Read())
+            {
+                Deck deck = new Deck();
+                deck.DeckId = Convert.ToInt32(reader["DeckID"].ToString());
+                deck.CreatorUserId = Convert.ToInt32(reader["CreatorUserID"].ToString());
+                deck.DeckName = reader["DeckName"].ToString();
+                deck.Created = Convert.ToDateTime(reader["Created"].ToString());
+                deck.Description = reader["Description"].ToString();
+                deck.DeckColor = reader["DeckColor"].ToString();
+
+                deckList.AddLast(deck);
+            }
+
+            conn.Close();
+
+            return deckList;
+        }
+
         internal Deck GetDeckByID(int deckId)
         {
             string connStr = configuration.GetConnectionString("DefaultConnection");
