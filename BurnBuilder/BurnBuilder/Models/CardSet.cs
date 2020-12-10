@@ -5,6 +5,9 @@ using System.Text.Json.Serialization;
 
 namespace BurnBuilder.Models
 {
+    /// <summary>
+    /// These are all the fields in CardSet Table in the database. 
+    /// </summary>
     public class CardSet
     {
         [Key]
