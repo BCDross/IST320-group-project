@@ -1,11 +1,29 @@
-﻿
+
 @{
-    ViewData["Title"] = "BrowseCards";
+    ViewData["Title"] = "Browse Cards";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 @model LinkedList<BurnBuilder.Models.Card>
+   
+ <style>
+     form {
+         border: 2px dashed;
+         border-radius: 5px;
+         padding: 10px;
+         box-sizing: content-box;
+         width: 500px;
+         height: 560px;
+         background-color: #F5F5F5;
+         text-align: inherit;
+     }
+        label {
+            padding: 20px
+        }
 
-<h1>BrowseCards</h1>
+    </style>
+
+<h1>Browse Cards</h1>
+<br />
 
 @*Form for user to fill out to find a card they want to look at
 <form>
@@ -37,13 +55,14 @@ div class="card" style="width: 20rem;">
 @foreach (Card card in Model)
 {
 <form>
-    <label>Name: @card.Name </label><br />
-    <label>Colors: @card.ManaCost </label><br />
-    <label>Type: @card.Type </label><br />
-    <label>Rarity: @card.Rarity </label><br />
-    <label>Text: @card.Text</label><br />
-    <img src="@card.ImageUrl" alt="@card.Name"><br />
+    <img src="@card.ImageUrl" alt="@card.Name" align="left"><br />
+    <label><b>Name: </b>@card.Name </label><br />
+    <label><b>Colors: </b>@card.ManaCost </label><br />
+    <label><b>Type: </b>@card.Type </label><br />
+    <label><b>Rarity: </b>@card.Rarity </label><br />
+    <label><b>Text: </b>@card.Text</label><br />
+
     @*<input type="button" value="search" id="searchButton" /><br />*@
 </form>
-
+<br />
 }
