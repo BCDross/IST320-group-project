@@ -3,7 +3,7 @@
     ViewData["Title"] = "Browse Cards";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-@model LinkedList<BurnBuilder.Models.Card>
+@model Tuple<LinkedList<Card>, LinkedList<Deck>>
    
  <style>
      form {
@@ -52,7 +52,7 @@ div class="card" style="width: 20rem;">
 </div>*@
 
 
-@foreach (Card card in Model)
+@foreach (Card card in Model.Item1)
 {
 <form>
     <fieldset>
