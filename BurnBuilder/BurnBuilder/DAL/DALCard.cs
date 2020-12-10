@@ -113,7 +113,7 @@ namespace BurnBuilder.DAL
                 card.Legalities = reader["Legalities"].ToString();
                 card.Id = reader["ID"].ToString();
 
-                allCards.AddLast(card);
+                if(card.ImageUrl != "")allCards.AddLast(card);
             }
             
             conn.Close();
