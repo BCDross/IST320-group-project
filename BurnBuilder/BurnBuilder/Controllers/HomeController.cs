@@ -136,8 +136,10 @@ namespace BurnBuilder.Controllers
             }
             else
             {
+                deck.Created = DateTime.Now;
                 DALDeck dalDeck = new DALDeck(_configuration);
                 dalDeck.InsertDeck(deck);
+                
 
                 return View("BrowseCards");
             }
