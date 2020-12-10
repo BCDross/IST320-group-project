@@ -1,0 +1,19 @@
+﻿
+@{
+    ViewData["Title"] = "CreateDeck";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@model BurnBuilder.Models.Deck
+
+<h1>Create Deck</h1>
+<br />
+
+<form asp-action="CreateDeck" method="post">
+    <label>Deck Name</label><input asp-for="DeckName" />
+    <br />
+    <label>Description</label><input asp-for="Description" />
+    <br />
+    <label>Deck Color</label><input asp-for="DeckColor" />
+    <br />
+    <button type="submit">Create Deck</button>
+</form>

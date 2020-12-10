@@ -117,17 +117,12 @@ namespace BurnBuilder.Controllers
             else
             {
                 DALUser dUser = new DALUser(_configuration);
-                dUser.GetUserById(userId);
-                return View(dUser);
+                User u = dUser.GetUserById(userId);
+                return View(u);
             }
         }
 
-        /// <summary>
-        /// Dsplays ViewCard page after login or index page.
-        /// </summary>
-        /// <param name="card"></param>
-        /// <returns></returns>
-        public IActionResult ViewCard(Card card)
+        public IActionResult CreateDeck(Deck deck)
         {
             string struID = HttpContext.Session.GetString("uID");
             if (struID == null)
@@ -136,11 +131,26 @@ namespace BurnBuilder.Controllers
             }
             else
             {
-                DALCard uCard = new DALCard(_configuration);
-                int cID = Convert.ToInt32(uCard.GetCardById(card.CardId));
-                card.CardId = cID;
+                DALDeck dalDeck = new DALDeck(_configuration);
+                dalDeck.InsertDeck(deck);
 
-                return View(card);
+                return View("BrowseCards");
+            }
+        }
+
+        public IActionResult ViewCard(int cardId)
+        {
+            string struID = HttpContext.Session.GetString("uID");
+            if (struID == null)
+            {
+                return View("Index");
+            }
+            else
+            {
+                DALCard dalCard = new DALCard(_configuration);
+                Card c = dalCard.GetCardById(cardId);
+
+                return View(c);
             }
         }
         
@@ -149,7 +159,7 @@ namespace BurnBuilder.Controllers
         /// </summary>
         /// <param name="deck"></param>
         /// <returns></returns>
-        public IActionResult ViewDeck(Deck deck)
+        public IActionResult ViewDeck(int deckId)
         {
             string struID = HttpContext.Session.GetString("uID");
             if (struID == null)
@@ -158,17 +168,16 @@ namespace BurnBuilder.Controllers
             }
             else
             {
-                if (deck == null || deck.DeckId == 0)
+                if (deckId == null || deckId == 0)
                 {
                     return View("BrowseDecks");
                 }
                 else
                 {
-                    DALDeck uDeck = new DALDeck(_configuration);
-                    int dID = Convert.ToInt32(uDeck.GetDeckByID(deck.DeckId));
-                    deck.DeckId = dID;
+                    DALDeck dalDeck = new DALDeck(_configuration);
+                    dalDeck.GetDeckByID(deckId);
 
-                    return View(deck);
+                    return View(dalDeck);
                 }
             }
         }
@@ -190,7 +199,7 @@ namespace BurnBuilder.Controllers
                 DALCard dalCard = new DALCard(_configuration);
                 LinkedList<Card> cardList = new LinkedList<Card>();
                 cardList = dalCard.GetAllCards();
-                
+
                 return View(cardList);
             }
         }
@@ -200,7 +209,7 @@ namespace BurnBuilder.Controllers
         /// </summary>
         /// <param name="deck"></param>
         /// <returns></returns>
-        public IActionResult BrowseDecks(Deck deck)
+        public IActionResult BrowseDecks()
         {
             string struID = HttpContext.Session.GetString("uID");
             if (struID == null)
@@ -209,18 +218,11 @@ namespace BurnBuilder.Controllers
             }
             else
             {
-                if (deck == null)
-                {
-                    return View("BrowseDecks");
-                }
-                else
-                {
-                    DALDeck dalDeck = new DALDeck(_configuration);
-                    LinkedList<Deck> deckList = new LinkedList<Deck>();
-                    deckList = dalDeck.GetAllDecks();
+                DALDeck dalDeck = new DALDeck(_configuration);
+                LinkedList<Deck> deckList = new LinkedList<Deck>();
+                deckList = dalDeck.GetAllDecks();
 
-                    return View(deckList);
-                }
+                return View(deckList);
             }
         }
         /*public IActionResult Privacy()
