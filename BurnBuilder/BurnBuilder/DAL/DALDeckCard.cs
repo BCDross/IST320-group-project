@@ -7,7 +7,11 @@ using Microsoft.Data.SqlClient;
 using Microsoft.Extensions.Configuration;
 
 namespace BurnBuilder.DAL
-{
+{   
+    /// <summary>
+    /// These are all the methods that work with the DeckCard Table in the database. 
+    /// They perform the CRUD operations. 
+    /// </summary>
     public class DALDeckCard
     {
         private readonly IConfiguration configuration;
