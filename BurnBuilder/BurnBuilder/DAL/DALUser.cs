@@ -10,6 +10,10 @@ using Microsoft.Extensions.Configuration;
 
 namespace BurnBuilder.DAL
 {
+    // <summary>
+    /// These are all the methods that work with the User Table in the database. 
+    /// They perform the CRUD operations. 
+    /// </summary>
     public class DALUser
     {
         private IConfiguration _configuration { get; }
