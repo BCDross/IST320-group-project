@@ -55,14 +55,31 @@ div class="card" style="width: 20rem;">
 @foreach (Card card in Model)
 {
 <form>
-    <img src="@card.ImageUrl" alt="@card.Name" align="left"><br />
-    <label><b>Name: </b>@card.Name </label><br />
-    <label><b>Colors: </b>@card.ManaCost </label><br />
-    <label><b>Type: </b>@card.Type </label><br />
-    <label><b>Rarity: </b>@card.Rarity </label><br />
-    <label><b>Text: </b>@card.Text</label><br />
-
-    @*<input type="button" value="search" id="searchButton" /><br />*@
+    <fieldset>
+        <legend>Name: @card.Name</legend>
+        <label>Colors: @card.ManaCost </label><br />
+        <label>Type: @card.Type </label><br />
+        <label>Rarity: @card.Rarity </label><br />
+        <label>Text: @card.Text</label><br />
+        <img src="@card.ImageUrl" alt="@card.Name"><br />
+        <div>Qty:</div>
+        <input type="checkbox" value="check me" />
+        <select name="Amount">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+        </select>
+        <div>To:</div>
+        <select name="Decks">
+            <option value="1">Deck 1</option>
+            <option value="2">Deck 2</option>
+            <option value="3">Deck 3</option>
+            <option value="4">Deck 4</option>
+            <option value="5">Deck 5</option>
+        </select>
+        <input type="submit" value="Add To Deck" /><br />
+    </fieldset>
 </form>
 <br />
 }
