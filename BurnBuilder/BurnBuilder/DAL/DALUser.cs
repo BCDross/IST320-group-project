@@ -89,7 +89,7 @@ namespace BurnBuilder.DAL
             conn.Open();
 
             string query = "UPDATE [dbo].[User] SET [EmailAddress] = @EmailAddress, [Password] = @Password, [FirstName] = @FirstName, [LastName] = @LastName, [Created] = @Created WHERE UserID = @UserID";
-            SqlCommand cmd = new SqlCommand();
+            SqlCommand cmd = new SqlCommand(query, conn);
             cmd.Parameters.AddWithValue("@EmailAddress", user.EmailAddress);
             cmd.Parameters.AddWithValue("@Password", user.Password);
             cmd.Parameters.AddWithValue("@FirstName", user.FirstName);
@@ -113,7 +113,7 @@ namespace BurnBuilder.DAL
             conn.Open();
 
             string query = "DELETE [dbo].[User] WHERE UserID = @UserID";
-            SqlCommand cmd = new SqlCommand();
+            SqlCommand cmd = new SqlCommand(query, conn);
             cmd.Parameters.AddWithValue("@UserID", userId);
 
             cmd.ExecuteNonQuery();
