@@ -1,19 +1,32 @@
-﻿
-@{
-    ViewData["Title"] = "BrowseDecks";
-    Layout = "~/Views/Shared/_Layout.cshtml";
-}
+
+@{ ViewData["Title"] = "Browse Decks";
+    Layout = "~/Views/Shared/_Layout.cshtml"; }
 @model LinkedList<BurnBuilder.Models.Deck>
+<style>
+    form {
+        border: 2px dashed;
+        border-radius: 5px;
+        padding: 10px;
+        box-sizing: content-box;
+        width: 190px;
+        height: 200px;
+        background-color: #FAF0E6;
+        text-align: inherit;
+    }
+
+</style>
+
 <h1>Browse Decks</h1>
 <br />
 
 @foreach (Deck deck in Model)
 {
-    <form>
-        <label>Name: @deck.DeckName </label><br />
-        <label>Description: @deck.Description </label><br />
-        <label>Color: @deck.DeckColor </label><br />
-        @*<input type="button" value="search" id="searchButton" /><br />*@
-    </form>
-
+<form>
+    <label><b>Name: </b>@deck.DeckName </label><br />
+    <label><b>Description: </b>@deck.Description </label><br />
+    <label><b>Color: </b>@deck.DeckColor </label><br />
+    <br />
+    @*<input type="button" value="search" id="searchButton" /><br />*@
+</form>
+<br />
 }
