@@ -55,13 +55,14 @@ namespace BurnBuilder.DAL
             SqlConnection conn = new SqlConnection(connStr);
             conn.Open();
 
-            string query = "SELECT [EmailAddress], [Password], [FirstName], [LastName], [Created] FROM [dbo].[User] WHERE UserID = @UserID";
+            string query = "SELECT [UserID], [EmailAddress], [Password], [FirstName], [LastName], [Created] FROM [dbo].[User] WHERE [UserID] = @UserID";
             SqlCommand cmd = new SqlCommand(query, conn);
             cmd.Parameters.AddWithValue("@UserID", userId);
             
             SqlDataReader reader = cmd.ExecuteReader();
             reader.Read();
 
+            int userID = Convert.ToInt32(reader["UserID"].ToString());
             string emailAddress = reader["EmailAddress"].ToString();
             string password = reader["Password"].ToString();
             string firstName = reader["FirstName"].ToString();
@@ -73,6 +74,7 @@ namespace BurnBuilder.DAL
             conn.Close();
 
             User u = new User();
+            u.UserId = userId;
             u.EmailAddress = emailAddress;
             u.Password = password;
             u.FirstName = firstName;
@@ -128,25 +130,23 @@ namespace BurnBuilder.DAL
             SqlConnection conn = new SqlConnection(connStr);
             conn.Open();
 
-            string query = "SELECT UserID, FirstName FROM [User] WHERE EmailAddress = @EmailAddress AND Password = @Password";
+            string query = "SELECT UserId FROM [dbo].[User] WHERE [EmailAddress] = @EmailAddress AND [Password] = @Password";
             SqlCommand cmd = new SqlCommand(query, conn);
             cmd.Parameters.AddWithValue("@EmailAddress", user.EmailAddress);
             cmd.Parameters.AddWithValue("@Password", user.Password);
 
             SqlDataReader reader = cmd.ExecuteReader();
-            User u = new User();
+            User u = null;
 
             if (reader.Read())
             {
-                u.FirstName = reader["FirstName"].ToString();
-                u.UserId = Convert.ToInt32(reader["UserID"]);
+                u = new User();
+                u.UserId = Convert.ToInt32(reader["UserId"]);
             }
             else
             {
                 // Need to figure out to return something if they are not valid users. Maybe in version 1.1.
             }
-
-            reader.Close();
 
             conn.Close();
             

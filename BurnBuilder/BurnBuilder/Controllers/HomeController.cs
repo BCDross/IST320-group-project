@@ -61,7 +61,7 @@ namespace BurnBuilder.Controllers
             }
             else
             {
-                HttpContext.Session.SetString("uID", Convert.ToString(user.UserId));
+                HttpContext.Session.SetString("uID", Convert.ToString(personModel.UserId));
                 ViewBag.LoginMessage = "Login Successful";
             }
             return View("HomePage");
@@ -107,7 +107,7 @@ namespace BurnBuilder.Controllers
         /// </summary>
         /// <param name="user"></param>
         /// <returns></returns>
-        public IActionResult Account(int userId)
+        public IActionResult Account()
         {
             string struID = HttpContext.Session.GetString("uID");
             if (struID == null)
@@ -117,7 +117,7 @@ namespace BurnBuilder.Controllers
             else
             {
                 DALUser dUser = new DALUser(_configuration);
-                User u = dUser.GetUserById(userId);
+                User u = dUser.GetUserById(Convert.ToInt32(struID));
                 return View(u);
             }
         }
