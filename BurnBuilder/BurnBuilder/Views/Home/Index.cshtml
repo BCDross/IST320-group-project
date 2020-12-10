@@ -27,22 +27,28 @@
 </form>
 <br /><br />
 
-<h5>To register, Please add the info below:</h5><br />
 <form asp-action="Register" method="post">
+    <fieldset> <legend>Register</legend>
     <label>First Name</label> <input asp-for="FirstName" />
     <br />
     <label>Last Name</label> <input asp-for="LastName" />
     <br />
-    <label>Email Address</label> <input asp-for="EmailAddress" />
+    <label>Email</label> <input asp-for="EmailAddress" />
     <br />
-    <label>Current Time</label> <input asp-for="Created" /><p>(Example: 2020-11-25 12:00:00.0000000)</p>
+    <label>Current time</label> <input asp-for="Created" />
+    <div id="time">Copy this time: </div>
+    <br />
     <label>Password</label> <input asp-for="Password" type="password" id="myInput" />
     <br />
     <input type="checkbox" id="passwordBox" />Show Password
     <br />
     <button type="submit">Submit</button>
+    </fieldset>
 </form>
 <script>
+        let d = new Date();
+        document.getElementById("time").innerHTML += d.getFullYear() + "-" + d.getMonth() + "-" + d.getDate() + " " + d.getHours() + ":" + d.getMinutes() + ":" + d.getSeconds() + "." + d.getMilliseconds() + "0000";
+
         //this function is used to protect the password unless the box is checked to show password
         const passBox = document.getElementById("passwordBox");
         passBox.addEventListener("click", changePassword);
