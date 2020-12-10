@@ -136,12 +136,19 @@ namespace BurnBuilder.Controllers
             }
             else
             {
-                deck.Created = DateTime.Now;
-                deck.CreatorUserId = Convert.ToInt32(struID);
-                DALDeck dalDeck = new DALDeck(_configuration);
-                dalDeck.InsertDeck(deck);
-                
-                return View("BrowseCards");
+                if (deck == null)
+                {
+                    return View("CreateDeck");
+                }
+                else
+                {
+                    deck.Created = DateTime.Now;
+                    deck.CreatorUserId = Convert.ToInt32(struID);
+                    DALDeck dalDeck = new DALDeck(_configuration);
+                    dalDeck.InsertDeck(deck);
+
+                    return View("BrowseCards");
+                }
             }
         }
 
