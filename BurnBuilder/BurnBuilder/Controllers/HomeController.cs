@@ -136,7 +136,7 @@ namespace BurnBuilder.Controllers
             }
             else
             {
-                if (deck == null)
+                if (deck.DeckName == null)
                 {
                     return View("CreateDeck");
                 }
@@ -147,7 +147,7 @@ namespace BurnBuilder.Controllers
                     DALDeck dalDeck = new DALDeck(_configuration);
                     dalDeck.InsertDeck(deck);
 
-                    return View("BrowseCards");
+                    return View("HomePage");
                 }
             }
         }

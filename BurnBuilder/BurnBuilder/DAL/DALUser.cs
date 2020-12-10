@@ -56,7 +56,7 @@ namespace BurnBuilder.DAL
             conn.Open();
 
             string query = "SELECT [EmailAddress], [Password], [FirstName], [LastName], [Created] FROM [dbo].[User] WHERE UserID = @UserID";
-            SqlCommand cmd = new SqlCommand();
+            SqlCommand cmd = new SqlCommand(query, conn);
             cmd.Parameters.AddWithValue("@UserID", userId);
             
             SqlDataReader reader = cmd.ExecuteReader();

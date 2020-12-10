@@ -55,7 +55,7 @@ namespace BurnBuilder.DAL
             SqlConnection conn = new SqlConnection(connStr);
             conn.Open();
 
-            string query = "SELECT [CreatorUserID],[DeckName],[Created],[Description],[DeckColor] FROM [dbo].[Deck];";
+            string query = "SELECT [DeckID],[CreatorUserID],[DeckName],[Created],[Description],[DeckColor] FROM [dbo].[Deck];";
             SqlCommand cmd = new SqlCommand(query, conn);
             
             SqlDataReader reader = cmd.ExecuteReader();
