@@ -122,6 +122,16 @@ namespace BurnBuilder.Controllers
             }
         }
 
+        public IActionResult UpdateAccount(User user)
+        {
+            int uID = Convert.ToInt32(HttpContext.Session.GetString("uID"));
+            user.UserId = uID;
+
+            DALUser dp = new DALUser(_configuration);
+            dp.UpdateUser(user);
+
+            return View("Account", user);
+        }
         /// <summary>
         /// Displays a Create Deck form page.
         /// </summary>
@@ -231,6 +241,23 @@ namespace BurnBuilder.Controllers
         /// <param name="deck"></param>
         /// <returns></returns>
         public IActionResult BrowseDecks()
+        {
+            string struID = HttpContext.Session.GetString("uID");
+            if (struID == null)
+            {
+                return View("Index");
+            }
+            else
+            {
+                DALDeck dalDeck = new DALDeck(_configuration);
+                LinkedList<Deck> deckList = new LinkedList<Deck>();
+                deckList = dalDeck.GetAllDecks();
+
+                return View(deckList);
+            }
+        }
+
+        public IActionResult EditDeck()
         {
             string struID = HttpContext.Session.GetString("uID");
             if (struID == null)
