@@ -9,6 +9,10 @@ using MongoDB.Bson.Serialization.Attributes;
 
 namespace BurnBuilder.Models
 {
+    /// <summary>
+    /// These are all the fields in Card Table in the database. 
+    /// </summary>
+    
     // Needs to be named Cards to differentiate between the MTG SDK and our internal structures.
     [Table("Card")]
     public class Card
