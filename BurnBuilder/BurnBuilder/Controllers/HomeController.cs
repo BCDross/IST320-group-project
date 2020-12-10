@@ -174,7 +174,7 @@ namespace BurnBuilder.Controllers
         }
         
         /// <summary>
-        /// Dsplays ViewDeck page after login or index page.
+        /// Displays ViewDeck page after login or index page.
         /// </summary>
         /// <param name="deck"></param>
         /// <returns></returns>
@@ -202,7 +202,7 @@ namespace BurnBuilder.Controllers
         }
         
         /// <summary>
-        /// Dsplays BrowseCards page after login or index page.
+        /// Displays BrowseCards page after login or index page.
         /// </summary>
         /// <param name="card"></param>
         /// <returns></returns>
@@ -224,7 +224,7 @@ namespace BurnBuilder.Controllers
         }
         
         /// <summary>
-        ///Dsplays BrowseDecks page after login or index page. 
+        ///Displays BrowseDecks page after login or index page. 
         /// </summary>
         /// <param name="deck"></param>
         /// <returns></returns>
