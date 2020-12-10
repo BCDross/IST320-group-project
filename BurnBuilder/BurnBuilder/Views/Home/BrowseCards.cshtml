@@ -11,8 +11,8 @@
          border-radius: 5px;
          padding: 10px;
          box-sizing: content-box;
-         width: 500px;
-         height: 560px;
+         width: 510px;
+         height: 650px;
          background-color: #F5F5F5;
          text-align: inherit;
      }
@@ -57,11 +57,11 @@ div class="card" style="width: 20rem;">
 <form>
     <fieldset>
         <legend>Name: @card.Name</legend>
-        <label>Colors: @card.ManaCost </label><br />
+        <label>Colors: @card.ManaCost </label>
+        <img src="@card.ImageUrl" alt="@card.Name" ALIGN="right">
         <label>Type: @card.Type </label><br />
         <label>Rarity: @card.Rarity </label><br />
         <label>Text: @card.Text</label><br />
-        <img src="@card.ImageUrl" alt="@card.Name"><br />
         <div>Qty:</div>
         <input type="checkbox" value="check me" />
         <select name="Amount">
