@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace BurnBuilder.Models
 {
+    /// <summary>
+    /// These are all the fields in Deck Table in the database. 
+    /// </summary>
     public class Deck
     {
         [Key]
