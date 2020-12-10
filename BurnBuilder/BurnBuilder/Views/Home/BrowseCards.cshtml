@@ -37,12 +37,12 @@ div class="card" style="width: 20rem;">
 @foreach (Card card in Model)
 {
 <form>
-    <label>Name: @card.Name </label>
-    <label>Colors: @card.ManaCost </label>
-    <label>Type: @card.Type </label>
-    <label>Rarity: @card.Rarity </label>
-    <label>Text: @card.Text</label>
-    <img src="@card.ImageUrl" alt="@card.Name">
+    <label>Name: @card.Name </label><br />
+    <label>Colors: @card.ManaCost </label><br />
+    <label>Type: @card.Type </label><br />
+    <label>Rarity: @card.Rarity </label><br />
+    <label>Text: @card.Text</label><br />
+    <img src="@card.ImageUrl" alt="@card.Name"><br />
     @*<input type="button" value="search" id="searchButton" /><br />*@
 </form>
 
