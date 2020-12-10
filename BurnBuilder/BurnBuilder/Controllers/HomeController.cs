@@ -11,7 +11,6 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.AspNetCore.Http;
 using System.Data.SqlClient;
 
-
 namespace BurnBuilder.Controllers
 {
     public class HomeController : Controller
@@ -29,7 +28,7 @@ namespace BurnBuilder.Controllers
         {
             return View();
         }
-
+        
         public IActionResult Register(User User)
         {
             DALUser dALPerson = new DALUser(_configuration);
@@ -101,8 +100,6 @@ namespace BurnBuilder.Controllers
             }
         }
 
-        
-
         public IActionResult ViewCard(Card card)
         {
             string struID = HttpContext.Session.GetString("uID");
@@ -112,7 +109,11 @@ namespace BurnBuilder.Controllers
             }
             else
             {
-                return View();
+                DALCard uCard = new DALCard(_configuration);
+                int cID = Convert.ToInt32(uCard.GetCardById(card.CardId));
+                card.CardId = cID;
+
+                return View(card);
             }
         }
         public IActionResult ViewDeck(Deck deck)
@@ -124,14 +125,20 @@ namespace BurnBuilder.Controllers
             }
             else
             {
-                DALDeck uDeck = new DALDeck(_configuration);
-                int dID = Convert.ToInt32(uDeck.GetDeckByID(deck.DeckId));
-                deck.DeckId = dID;
-
-                return View(deck);
+                if (deck == null || deck.DeckId == 0)
+                {
+                    return View("BrowseDecks");
+                }
+                else
+                {
+                    DALDeck uDeck = new DALDeck(_configuration);
+                    uDeck.GetDeckByID(deck.DeckId);
+                    
+                    return View(uDeck);
+                }
             }
         }
-        public IActionResult BrowseCards(Card card)
+        public IActionResult BrowseCards()
         {
             string struID = HttpContext.Session.GetString("uID");
             if (struID == null)
@@ -140,11 +147,11 @@ namespace BurnBuilder.Controllers
             }
             else
             {
-                DALCardSet uCardset = new DALCardSet(_configuration);
-                int csID = Convert.ToInt32(uCardset.GetCardSetById(card.CardId));
-                card.CardId = csID;
-
-                return View(card);
+                DALCard dalCard = new DALCard(_configuration);
+                LinkedList<Card> cardList = new LinkedList<Card>();
+                cardList = dalCard.GetAllCards();
+                
+                return View(cardList);
             }
         }
         public IActionResult BrowseDecks(Deck deck)
@@ -156,9 +163,16 @@ namespace BurnBuilder.Controllers
             }
             else
             {
-                DALDeck uDeck = new DALDeck(_configuration);
-                int dID = Convert.ToInt32(uDeck.GetDeckByID(deck.DeckId));
-                deck.DeckId = dID;
+                if (deck == null)
+                {
+                    return View("BrowseDecks");
+                }
+                else
+                {
+                    DALDeck uDeck = new DALDeck(_configuration);
+                    int dID = Convert.ToInt32(uDeck.GetDeckByID(deck.DeckId));
+                    deck.DeckId = dID;
+                }
 
                 return View(deck);
             }
