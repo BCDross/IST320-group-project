@@ -122,6 +122,11 @@ namespace BurnBuilder.Controllers
             }
         }
 
+        /// <summary>
+        /// Displays a Create Deck form page.
+        /// </summary>
+        /// <param name="deck"></param>
+        /// <returns></returns>
         public IActionResult CreateDeck(Deck deck)
         {
             string struID = HttpContext.Session.GetString("uID");
@@ -138,6 +143,11 @@ namespace BurnBuilder.Controllers
             }
         }
 
+        /// <summary>
+        /// Displays ViewDeck page after login or index page.
+        /// </summary>
+        /// <param name="deck"></param>
+        /// <returns></returns>
         public IActionResult ViewCard(int cardId)
         {
             string struID = HttpContext.Session.GetString("uID");
