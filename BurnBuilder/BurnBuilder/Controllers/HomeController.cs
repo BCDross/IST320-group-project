@@ -131,11 +131,11 @@ namespace BurnBuilder.Controllers
                 }
                 else
                 {
-                    DALDeck dalDeck = new DALDeck(_configuration);
-                    LinkedList<Deck> deckList = new LinkedList<Deck>();
-                    deckList = dalDeck.GetAllDecks();
-                    
-                    return View(deckList);
+                    DALDeck uDeck = new DALDeck(_configuration);
+                    int dID = Convert.ToInt32(uDeck.GetDeckByID(deck.DeckId));
+                    deck.DeckId = dID;
+
+                    return View(deck);
                 }
             }
         }
@@ -170,12 +170,12 @@ namespace BurnBuilder.Controllers
                 }
                 else
                 {
-                    DALDeck uDeck = new DALDeck(_configuration);
-                    int dID = Convert.ToInt32(uDeck.GetDeckByID(deck.DeckId));
-                    deck.DeckId = dID;
-                }
+                    DALDeck dalDeck = new DALDeck(_configuration);
+                    LinkedList<Deck> deckList = new LinkedList<Deck>();
+                    deckList = dalDeck.GetAllDecks();
 
-                return View(deck);
+                    return View(deckList);
+                }
             }
         }
         /*public IActionResult Privacy()
