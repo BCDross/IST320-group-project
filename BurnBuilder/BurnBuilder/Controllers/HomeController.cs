@@ -87,7 +87,7 @@ namespace BurnBuilder.Controllers
             }
         }*/
 
-        public IActionResult Account(User user)
+        public IActionResult Account(int userId)
         {
             string struID = HttpContext.Session.GetString("uID");
             if (struID == null)
@@ -96,7 +96,9 @@ namespace BurnBuilder.Controllers
             }
             else
             {
-                return View("Account");
+                DALUser dUser = new DALUser(_configuration);
+                dUser.GetUserById(userId);
+                return View(dUser);
             }
         }
 

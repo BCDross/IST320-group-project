@@ -72,7 +72,7 @@ namespace BurnBuilder.DAL
             conn.Open();
 
             string query =
-                "SELECT [Name],[ManaCost],[Cmc],[Colors],[ColorIdentity],[Type],[Supertypes],[Types],[Subtypes],[Rarity],[Set],[SetName],[Text],[Artist],[Number],[Layout],[MultiverseID],[ImageUrl],[Rulings],[ForeignNames],[Printings],[OriginalText],[Legalities],[Id] FROM [dbo].[Card]";
+                "SELECT [CardID],[Name],[ManaCost],[Cmc],[Colors],[ColorIdentity],[Type],[Supertypes],[Types],[Subtypes],[Rarity],[Set],[SetName],[Text],[Artist],[Number],[Layout],[MultiverseID],[ImageUrl],[Rulings],[ForeignNames],[Printings],[OriginalText],[OriginalType],[Legalities],[Id] FROM [dbo].[Card]";
             SqlCommand cmd = new SqlCommand(query, conn);
 
             SqlDataReader reader = cmd.ExecuteReader();
@@ -108,6 +108,8 @@ namespace BurnBuilder.DAL
                 card.OriginalType = reader["OriginalType"].ToString();
                 card.Legalities = reader["Legalities"].ToString();
                 card.Id = reader["ID"].ToString();
+
+                allCards.AddLast(card);
             }
             
             conn.Close();
