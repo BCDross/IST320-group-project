@@ -8,6 +8,10 @@ using Microsoft.Extensions.Configuration;
 
 namespace BurnBuilder.DAL
 {
+    /// <summary>
+    /// These are all the methods that work with the Card Table in the database. 
+    /// They perform the CRUD operations. 
+    /// </summary>
     public class DALCard
     {
         private readonly IConfiguration configuration;
